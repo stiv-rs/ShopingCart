@@ -14,11 +14,17 @@ import { CartItem } from '../models/cartItem';
 export class CarAppComponent implements OnInit{
 
   products: Product[] = [];
+
   items: CartItem[] = [];
 
   constructor(private service: ProductService){}
+  
   ngOnInit(): void {
     this.products = this.service.findAll();
+  }
+
+  onAddCart(product: Product){
+    this.items = [...this.items, {product: {...product}, quantity: 1}];
   }
 
 }
