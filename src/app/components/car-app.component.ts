@@ -23,6 +23,7 @@ export class CarAppComponent implements OnInit{
   
   ngOnInit(): void {
     this.products = this.service.findAll();
+    this.items = JSON.parse(sessionStorage.getItem('cart')!)|| [];
     this.calculateTotal();
   }
 
@@ -41,6 +42,7 @@ export class CarAppComponent implements OnInit{
       this.items = [...this.items, {product: {...product}, quantity: 1}];
     }
     this.calculateTotal();
+    this.savesession()
   }
 
   onDeleteCart(id: number): void{
@@ -50,5 +52,9 @@ export class CarAppComponent implements OnInit{
 
   calculateTotal():void{
     this.total = this.items.reduce((acumulator, item) => acumulator + item.quantity * item.product.price, 0);
+  }
+
+  savesession():void{
+    sessionStorage.setItem('cart',JSON.stringify(this.items));
   }
 }
