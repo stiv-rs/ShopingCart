@@ -6,7 +6,6 @@
         @if (showCart) {
             <cart-modal
                 [items]="items"
-                [total]="total" 
                 (idProductEmiter)="onDeleteCart($event)"
                 (closeEventEmitter)="openCloseCart()"
             />
